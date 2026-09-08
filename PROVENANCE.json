@@ -1,0 +1,56 @@
+[
+  {
+    "repository": "https://github.com/MAlazmii/Deal-with-trancaction-history-of-a-portfolio-of-stocks-.git",
+    "commit": "3f990ff8260f5b580d6efbba09b0d461105cec88",
+    "exercise": "stock-transactions",
+    "files": [
+      {
+        "source": "Assignment2.hs",
+        "destination": "exercises/stock-transactions/Assignment2.hs",
+        "sha256": "ad9443b336a95d4a15bbb8dfd083c59158a2e915659c32df51d1c28d76a5fe96"
+      },
+      {
+        "source": "README.md",
+        "destination": "docs/original-readmes/stock-transactions.md",
+        "sha256": "40796b87c95af6e2ff196f64080b62be8d8ca9e3d8963e52b3e21d8333ffe2b2"
+      }
+    ],
+    "excluded_generated_files": []
+  },
+  {
+    "repository": "https://github.com/MAlazmii/maze-game-.git",
+    "commit": "a05b6ab9d2511e7908e20591d247273e64b15fc1",
+    "exercise": "maze",
+    "files": [
+      {
+        "source": "Main.hs",
+        "destination": "exercises/maze/Main.hs",
+        "sha256": "f3cf6a86df841a4ace647f54e31f2c29f3c924d7af22458fa8a307954d2b04fd"
+      },
+      {
+        "source": "README.md",
+        "destination": "docs/original-readmes/maze.md",
+        "sha256": "92ee87bc62d21aec70ae9a7cf83432a9c31b85ff551bb5eea9c988e5217ecfec"
+      }
+    ],
+    "excluded_generated_files": []
+  },
+  {
+    "repository": "https://github.com/MAlazmii/mplement-an-encoder-and-decoder-for-the-repeat-encoding-in-Haskell..git",
+    "commit": "9373e953327b809a7eb47b33a55ae6709f364def",
+    "exercise": "repeat-encoding",
+    "files": [
+      {
+        "source": "Assignment1 (4).hs",
+        "destination": "exercises/repeat-encoding/Assignment1.hs",
+        "sha256": "4c6c933aebbbcad241ab1347387224e27850f9d950d45e51a1aa9165f4785ece"
+      },
+      {
+        "source": "README.md",
+        "destination": "docs/original-readmes/repeat-encoding.md",
+        "sha256": "d501a9033328fdaadf24cb9ba7e56ca3ff8ba9c2006d6139ef827876326e7d1c"
+      }
+    ],
+    "excluded_generated_files": []
+  }
+]
