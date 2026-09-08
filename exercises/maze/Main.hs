@@ -1,14 +1,15 @@
-module Main (get_maze, print_maze, is_wall, place_player, move, can_move, game_loop, get_path, main) where 
+module Main (get_maze, print_maze, is_wall, place_player, move, can_move, game_loop, get_path, main) where
 
 import System.Environment
+import System.IO (isEOF)
 
-maze_path = "D:\\haskellAssignment3\\maze2.txt"
+maze_path = "exercises/maze/maze.txt"
 
 -- Useful code from Lecture 25
 -- You may use this freely in your solutions
 
 get :: [String] -> Int -> Int -> Char
-get maze x y = (maze !! y) !! x 
+get maze x y = (maze !! y) !! x
 
 modify_list :: [a] -> Int -> a -> [a]
 modify_list list pos new =
@@ -19,7 +20,7 @@ modify_list list pos new =
         before ++ [new] ++ after
 
 set :: [String] -> Int -> Int -> Char -> [String]
-set maze x y char = 
+set maze x y char =
     let
         line = maze !! y
         new_line = modify_list line x char
@@ -33,10 +34,10 @@ set maze x y char =
 
 get_maze :: String -> IO [String]
 
-get_maze maze_path = do 
+get_maze maze_path = do
  mazeContent <- readFile maze_path
  return (lines mazeContent)
--- get_maze = do 
+-- get_maze = do
 -- x:xs <- readFile maze_path
 -- putStrLn (x:xs)
 
@@ -53,8 +54,10 @@ print_maze (x:xs) = do
 -- Question 3
 
 is_wall :: [String] -> (Int, Int) -> Bool
-is_wall mazeSt (x,y) 
- |(get mazeSt x y) == '#' = True   --using Gaurds 
+is_wall mazeSt (x,y)
+ |y < 0 || y >= length mazeSt = True
+ |x < 0 || x >= length (mazeSt !! y) = True
+ |(get mazeSt x y) == '#' = True   --using Gaurds
  |otherwise = False
 
 
@@ -88,10 +91,16 @@ can_move mazeSt (x,y) ch = if is_wall mazeSt (move (x,y) ch) then False else Tru
 game_loop :: [String] -> (Int, Int) -> IO ()
 game_loop mazStr (x,y) = do
  print_maze (place_player mazStr (x,y))
- input <- getLine
- if can_move mazStr (x,y)(input!!0) == True 
- then game_loop mazStr (move (x,y)(input!!0))
- else game_loop mazStr (x,y)
+ ended <- isEOF
+ if ended then return () else do
+  input <- getLine
+  case input of
+   [] -> game_loop mazStr (x,y)
+   (direction:_) ->
+    if can_move mazStr (x,y) direction
+    then game_loop mazStr (move (x,y) direction)
+    else game_loop mazStr (x,y)
+
 
 
 ---- Part C
@@ -112,4 +121,12 @@ get_path m start target = front m start
 
 main :: IO ()
 
-main = error "Not implemented"
+main = do
+ args <- getArgs
+ let path = case args of
+             [] -> maze_path
+             (file:_) -> file
+ maze <- get_maze path
+ if null maze || is_wall maze (1,1)
+ then ioError (userError "Maze must have an open starting cell at (1,1)")
+ else game_loop maze (1,1)
